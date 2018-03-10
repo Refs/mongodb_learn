@@ -137,6 +137,10 @@ https://stackoverflow.com/questions/8131344/what-is-the-difference-between-dirna
 ```bash
 npm install pug --save
 
+mkdir views
+touch index.pug
+
+
 ```
 
 ```js
@@ -154,7 +158,8 @@ app.set('view', 'pug');
 
 // Home router
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  // res.send("Hello world");
+  res.render('index')
 });
 
 // start server

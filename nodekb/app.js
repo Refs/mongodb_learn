@@ -6,13 +6,16 @@ const path = require('path');
 const app = express();
 
 // set view dir
-app.set('views', path.join(__dirname, 'view'));
+app.set('views', path.join(__dirname, 'views'));
 // load View Engine
-app.set('view', 'pug');
+app.set('view engine', 'pug');
 
 // Home router
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  // res.send("Hello world");
+  res.render('index',{
+    title: "hello"
+  })
 });
 
 // start server
