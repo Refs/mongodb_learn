@@ -81,5 +81,29 @@ npm init
 # entry point: (index.js) app.js(入口文件设置成为app.js)
 ```
 
+### 配置npm脚本
 
 > in the package.json you can write a little scripts with NPM to do certain thins they give you this default test
+
+```json
+{
+  "name": "nodekb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+// we can get rid of the test and let's say start  we just put the command we want to run 
+  "scripts": {
+    //"test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
+```
+### install 必要的 modules
+
+```bash
+npm install express --save
+
+```
