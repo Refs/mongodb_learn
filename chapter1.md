@@ -63,4 +63,23 @@ net start mongodb
 
 > 或者自己配置启动文件 
 
+electron 用于开发桌面的应用程序；像自己以前接触的软件，现在都可以用此来开发；
 
+
+
+## init our project
+
+### config package.json file 
+
+```bash
+
+cd /c/
+mkdir nodekb
+cd nodekb/
+npm init
+
+# entry point: (index.js) app.js(入口文件设置成为app.js)
+```
+
+
+> in the package.json you can write a little scripts with NPM to do certain thins they give you this default test
