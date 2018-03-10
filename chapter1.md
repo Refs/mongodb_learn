@@ -125,3 +125,8 @@ app.listen(3000,function(){
 
 
 ## pug template engine
+
+```bash
+npm install pug --save
+
+```

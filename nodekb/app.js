@@ -1,9 +1,16 @@
-const express = require('express');
-const app = express();
-app.get('/',(req, res) => {
-    res.send('Hello world');
-})
+const express = require("express");
 
-app.listen(3000,function(){
-    console.log('node server in runing on port 3000...')
-})
+// init APP
+const app = express();
+
+// load View Engine
+
+// Home router
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
+// start server
+app.listen(3000, function() {
+  console.log("node server in runing on port 3000...");
+});
