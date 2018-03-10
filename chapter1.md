@@ -126,7 +126,41 @@ app.listen(3000,function(){
 
 ## pug template engine
 
+> 预备知识
+
+* ./ __dirname 的区别 ：
+https://stackoverflow.com/questions/8131344/what-is-the-difference-between-dirname-and-in-node-js
+
+* app.set('view', path): A directory or an array of directories for the application's views. If an array, the views are looked up in the order they occur in the array.
+* app.set('view engine', 'pug'): The default engine extension to use when omitted.
+
 ```bash
 npm install pug --save
+
+```
+
+```js
+const express = require("express");
+// 引入路径合并模块
+const path = require('path');
+
+// init APP
+const app = express();
+
+// set view dir
+app.set('views', path.join(__dirname, 'view'));
+// load View Engine
+app.set('view', 'pug');
+
+// Home router
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
+// start server
+app.listen(3000, function() {
+  console.log("node server in runing on port 3000...");
+});
+
 
 ```
