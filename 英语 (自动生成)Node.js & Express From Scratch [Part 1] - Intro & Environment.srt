@@ -1,0 +1,1205 @@
+﻿1
+00:00:00,030 --> 00:00:02,040
+hey what's going on guys welcome to a
+
+2
+00:00:02,040 --> 00:00:04,200
+new series now for those of you waiting
+
+3
+00:00:04,200 --> 00:00:06,629
+on laravel the premium course the crash
+
+4
+00:00:06,629 --> 00:00:08,639
+course and the youtube project should
+
+5
+00:00:08,639 --> 00:00:10,230
+all be released within the next few
+
+6
+00:00:10,230 --> 00:00:12,540
+weeks so in this series what we're going
+
+7
+00:00:12,540 --> 00:00:15,000
+to be doing is creating a nodejs and
+
+8
+00:00:15,000 --> 00:00:17,070
+express application from absolute
+
+9
+00:00:17,070 --> 00:00:20,430
+scratch so the idea of this series is to
+
+10
+00:00:20,430 --> 00:00:23,760
+be very very beginner friendly and to be
+
+11
+00:00:23,760 --> 00:00:26,279
+kind of a continuation off of my node.js
+
+12
+00:00:26,279 --> 00:00:29,160
+for beginners crash course alright so
+
+13
+00:00:29,160 --> 00:00:30,960
+after people finish that this gives them
+
+14
+00:00:30,960 --> 00:00:32,700
+the opportunity to actually create a
+
+15
+00:00:32,700 --> 00:00:35,700
+project with node and express in a bunch
+
+16
+00:00:35,700 --> 00:00:38,309
+of other technologies ok so this will be
+
+17
+00:00:38,309 --> 00:00:39,930
+from absolute scratch we're going to
+
+18
+00:00:39,930 --> 00:00:41,489
+start on a machine that doesn't even
+
+19
+00:00:41,489 --> 00:00:44,280
+have no js' or Express or MongoDB
+
+20
+00:00:44,280 --> 00:00:46,160
+installed we're going to go through the
+
+21
+00:00:46,160 --> 00:00:47,969
+installations we're going to set up the
+
+22
+00:00:47,969 --> 00:00:50,219
+environment and then there's going to be 
+no generators no copying and pasting the
+
+24
+00:00:53,399 --> 00:00:55,050
+goal of this is to write and explain
+
+25
+00:00:55,050 --> 00:00:57,000
+every line of code so that you guys can
+
+26
+00:00:57,000 --> 00:00:59,430
+really grasp what's going on as opposed
+
+27
+00:00:59,430 --> 00:01:01,410
+to just watching a demo of an app being
+
+28
+00:01:01,410 --> 00:01:03,510
+built alright so if you have a little
+
+29
+00:01:03,510 --> 00:01:05,760
+experience with node and express in
+
+30
+00:01:05,760 --> 00:01:08,549
+MongoDB that's great if you don't even
+
+31
+00:01:08,549 --> 00:01:09,869
+know what those are I would suggest
+
+32
+00:01:09,869 --> 00:01:12,630
+watching these three videos here they're
+
+33
+00:01:12,630 --> 00:01:15,060
+there on my channel I was just watching
+
+34
+00:01:15,060 --> 00:01:17,250
+those before tempting the course or the
+
+35
+00:01:17,250 --> 00:01:19,619
+series alright now as far as the
+
+36
+00:01:19,619 --> 00:01:21,210
+application goes it's going to be very
+
+37
+00:01:21,210 --> 00:01:23,640
+simple in terms of functionality at
+
+38
+00:01:23,640 --> 00:01:25,259
+least at first we're going to be able to
+
+39
+00:01:25,259 --> 00:01:27,689
+create read update and delete articles
+
+40
+00:01:27,689 --> 00:01:31,380
+stored in a MongoDB database from our
+
+41
+00:01:31,380 --> 00:01:34,409
+node and Express app all right so let's
+
+42
+00:01:34,409 --> 00:01:36,299
+take a look at some of the technologies
+
+43
+00:01:36,299 --> 00:01:38,460
+that we'll be using and learning so
+
+44
+00:01:38,460 --> 00:01:41,280
+nodejs and npm nodejs is a JavaScript
+
+45
+00:01:41,280 --> 00:01:43,500
+runtime and server-side technology and
+
+46
+00:01:43,500 --> 00:01:46,020
+it comes with NPM which is node package
+
+47
+00:01:46,020 --> 00:01:48,149
+manager and this is used to install
+
+48
+00:01:48,149 --> 00:01:50,700
+modules like Express and thousands of
+
+49
+00:01:50,700 --> 00:01:53,100
+others okay so Express is a back-end
+
+50
+00:01:53,100 --> 00:01:54,689
+framework for building powerful
+
+51
+00:01:54,689 --> 00:01:56,869
+applications web applications
+
+52
+00:01:56,869 --> 00:01:59,990
+MongoDB which is a no SQL database
+
+53
+00:01:59,990 --> 00:02:02,579
+mongoose which is an ORM or an object
+
+54
+00:02:02,579 --> 00:02:04,979
+relational mapper and this allows our
+
+55
+00:02:04,979 --> 00:02:07,369
+application to interface with MongoDB
+
+56
+00:02:07,369 --> 00:02:10,289
+we'll be using the pug template engine
+
+57
+00:02:10,289 --> 00:02:13,270
+for our views pug is formally known as J
+
+58
+00:02:13,270 --> 00:02:15,220
+we'll be installing bootstrap a few
+
+59
+00:02:15,220 --> 00:02:16,840
+videos in and we're going to use Bower
+
+60
+00:02:16,840 --> 00:02:18,940
+for that which is a front-end package
+
+61
+00:02:18,940 --> 00:02:21,730
+manager similar to NPM we'll also do a
+
+62
+00:02:21,730 --> 00:02:24,100
+little bit of jQuery and Ajax to make
+
+63
+00:02:24,100 --> 00:02:27,130
+delete requests to our server alright so
+
+64
+00:02:27,130 --> 00:02:28,930
+I try not to mention this stuff too much
+
+65
+00:02:28,930 --> 00:02:30,910
+but I do have a patreon if you guys want
+
+66
+00:02:30,910 --> 00:02:32,830
+to support this channel directly even
+
+67
+00:02:32,830 --> 00:02:34,590
+$1.00 per month is greatly appreciated
+
+68
+00:02:34,590 --> 00:02:36,820
+if there's enough people that can help
+
+69
+00:02:36,820 --> 00:02:38,890
+out then I'll be able to do this stuff
+
+70
+00:02:38,890 --> 00:02:41,530
+full-time which is my goal and I'm also
+
+71
+00:02:41,530 --> 00:02:43,750
+working on some exclusive content and
+
+72
+00:02:43,750 --> 00:02:46,540
+perks for patrons for one-time donations
+
+73
+00:02:46,540 --> 00:02:49,060
+I have a paypal dot me account and then
+
+74
+00:02:49,060 --> 00:02:50,739
+if you're interested in premium courses
+
+75
+00:02:50,739 --> 00:02:52,840
+I have affiliate links at traversée
+
+76
+00:02:52,840 --> 00:02:55,390
+Mediacom slash edge' wanax courses
+
+77
+00:02:55,390 --> 00:02:57,310
+alright and I will be creating my own
+
+78
+00:02:57,310 --> 00:03:00,160
+courses very very soon so that's it guys
+
+79
+00:03:00,160 --> 00:03:01,810
+let's go ahead and get started on this
+
+80
+00:03:01,810 --> 00:03:04,140
+project and hopefully you enjoy it
+
+81
+00:03:04,140 --> 00:03:06,220
+alright guys in this video we're going
+
+82
+00:03:06,220 --> 00:03:08,350
+to be setting up our environment so
+
+83
+00:03:08,350 --> 00:03:09,730
+we're going to install a couple things
+
+84
+00:03:09,730 --> 00:03:12,310
+to build our application now I'm using
+
+85
+00:03:12,310 --> 00:03:13,750
+Windows because I want this to be
+
+86
+00:03:13,750 --> 00:03:16,030
+completely beginner friendly and I know
+
+87
+00:03:16,030 --> 00:03:17,230
+that a lot of people that are just
+
+88
+00:03:17,230 --> 00:03:19,890
+getting into web development and so on
+
+89
+00:03:19,890 --> 00:03:22,660
+maybe on Windows alright
+
+90
+00:03:22,660 --> 00:03:24,160
+but this is completely cross-platform
+
+91
+00:03:24,160 --> 00:03:26,890
+all the code we write everything it
+
+92
+00:03:26,890 --> 00:03:28,320
+doesn't matter what system you're on
+
+93
+00:03:28,320 --> 00:03:30,430
+alright so we're going to install a
+
+94
+00:03:30,430 --> 00:03:32,320
+couple things of course we need nodejs
+
+95
+00:03:32,320 --> 00:03:36,700
+and nodejs is a JavaScript runtime if
+
+96
+00:03:36,700 --> 00:03:39,370
+you have no clue what nodejs is I would
+
+97
+00:03:39,370 --> 00:03:42,070
+suggest watching my node for beginners
+
+98
+00:03:42,070 --> 00:03:43,900
+video we're going to install that that
+
+99
+00:03:43,900 --> 00:03:45,760
+also comes with NPM which is node
+
+100
+00:03:45,760 --> 00:03:48,220
+package manager and that's a command
+
+101
+00:03:48,220 --> 00:03:49,870
+line tool that we can use to install
+
+102
+00:03:49,870 --> 00:03:51,940
+different modules like Express and
+
+103
+00:03:51,940 --> 00:03:53,680
+Mongoose and so on
+
+104
+00:03:53,680 --> 00:03:55,180
+alright we're also going to need a
+
+105
+00:03:55,180 --> 00:03:57,120
+database and we're going to use MongoDB
+
+106
+00:03:57,120 --> 00:03:59,799
+long would you be is a no SQL database
+
+107
+00:03:59,799 --> 00:04:02,620
+if you want to learn more about Mongo
+
+108
+00:04:02,620 --> 00:04:05,110
+I'd suggest my MongoDB in 30 minutes
+
+109
+00:04:05,110 --> 00:04:08,200
+video I also just did a video called a
+
+110
+00:04:08,200 --> 00:04:10,959
+guide to know SQL databases if you want
+
+111
+00:04:10,959 --> 00:04:14,010
+to learn more about no SQL in general
+
+112
+00:04:14,010 --> 00:04:16,479
+we're also going to be using atom which
+
+113
+00:04:16,479 --> 00:04:19,419
+is a text editor this is what I've been
+
+114
+00:04:19,419 --> 00:04:22,930
+using for the most part lately and it's
+
+115
+00:04:22,930 --> 00:04:25,330
+it's a really nice editor it's by github
+
+116
+00:04:25,330 --> 00:04:26,950
+it's very very
+
+117
+00:04:26,950 --> 00:04:30,700
+well as far as looks and themes and it
+
+118
+00:04:30,700 --> 00:04:33,490
+also has a bunch of packages that you
+
+119
+00:04:33,490 --> 00:04:35,770
+can install that will help you with
+
+120
+00:04:35,770 --> 00:04:37,240
+development so we're going to install
+
+121
+00:04:37,240 --> 00:04:41,170
+that and then sensitive on Windows we
+
+122
+00:04:41,170 --> 00:04:43,030
+need a better command line because the
+
+123
+00:04:43,030 --> 00:04:45,820
+the standard CMD command line in Windows
+
+124
+00:04:45,820 --> 00:04:47,920
+is garbage so we're going to be using
+
+125
+00:04:47,920 --> 00:04:52,000
+git bash okay so this right here get SCM
+
+126
+00:04:52,000 --> 00:04:54,490
+comm you can download it it's going to
+
+127
+00:04:54,490 --> 00:04:56,890
+download the git version control system
+
+128
+00:04:56,890 --> 00:04:59,410
+along with the command line tool called
+
+129
+00:04:59,410 --> 00:05:01,690
+git bash alright so let's get started
+
+130
+00:05:01,690 --> 00:05:03,760
+first thing we'll do is install nodejs
+
+131
+00:05:03,760 --> 00:05:05,110
+so we're going to just go ahead and
+
+132
+00:05:05,110 --> 00:05:06,580
+click here we're going to get the
+
+133
+00:05:06,580 --> 00:05:08,680
+recommended version which is at this
+
+134
+00:05:08,680 --> 00:05:11,280
+time six point ten point three and
+
+135
+00:05:11,280 --> 00:05:13,450
+that's going to just be an installer
+
+136
+00:05:13,450 --> 00:05:15,310
+we'll just go through it quickly
+
+137
+00:05:15,310 --> 00:05:21,070
+alright so let's open it up and just go
+
+138
+00:05:21,070 --> 00:05:23,350
+through this we'll click Next and it's
+
+139
+00:05:23,350 --> 00:05:25,330
+going to go into your Program Files if
+
+140
+00:05:25,330 --> 00:05:33,840
+you're on Windows click Next and install
+
+141
+00:05:33,840 --> 00:05:36,670
+alright and it's as easy as that nodejs
+
+142
+00:05:36,670 --> 00:05:40,180
+and NPM is now installed so next thing
+
+143
+00:05:40,180 --> 00:05:41,710
+we're going to do is we're going to
+
+144
+00:05:41,710 --> 00:05:44,860
+install MongoDB so let's go ahead and go
+
+145
+00:05:44,860 --> 00:05:50,830
+to C download and there's a few steps
+
+146
+00:05:50,830 --> 00:05:53,170
+that we need to do here some of which
+
+147
+00:05:53,170 --> 00:05:55,360
+are in the command line but it's not too
+
+148
+00:05:55,360 --> 00:06:00,520
+bad so we're going to grab the yeah
+
+149
+00:06:00,520 --> 00:06:04,630
+windows 64-bit 2008 and later and that's
+
+150
+00:06:04,630 --> 00:06:06,820
+going to download the MSI file so this
+
+151
+00:06:06,820 --> 00:06:09,280
+is another installer that we need to go
+
+152
+00:06:09,280 --> 00:06:13,300
+through and it is a hundred and forty
+
+153
+00:06:13,300 --> 00:06:15,220
+eight megabytes so it may take a couple
+
+154
+00:06:15,220 --> 00:06:18,640
+minutes to download so once it's
+
+155
+00:06:18,640 --> 00:06:23,410
+downloaded just open it up and we're
+
+156
+00:06:23,410 --> 00:06:26,860
+going to go through this next and I'm
+
+157
+00:06:26,860 --> 00:06:28,570
+going to click custom right here because
+
+158
+00:06:28,570 --> 00:06:31,180
+I want to change the install path by
+
+159
+00:06:31,180 --> 00:06:33,360
+default it's going to be Program Files
+
+160
+00:06:33,360 --> 00:06:36,310
+MongoDB server and then the version I
+
+161
+00:06:36,310 --> 00:06:38,590
+don't want that I want it to be right in
+
+162
+00:06:38,590 --> 00:06:39,729
+the C Drive
+
+163
+00:06:39,729 --> 00:06:45,520
+so let's go to local C Drive and what
+
+164
+00:06:45,520 --> 00:06:47,169
+I'll do here is create a new folder
+
+165
+00:06:47,169 --> 00:06:51,580
+called MongoDB alright and that's where
+
+166
+00:06:51,580 --> 00:06:55,150
+we want this to be installed c / MongoDB
+
+167
+00:06:55,150 --> 00:06:58,839
+will click Next and then install and
+
+168
+00:06:58,839 --> 00:07:04,960
+it's going to go through the setup okay
+
+169
+00:07:04,960 --> 00:07:07,150
+so we'll click finish now there's a
+
+170
+00:07:07,150 --> 00:07:09,939
+couple extra steps we need to take we
+
+171
+00:07:09,939 --> 00:07:11,919
+need to go into that folder that we just
+
+172
+00:07:11,919 --> 00:07:14,469
+installed it in so for me it's going to
+
+173
+00:07:14,469 --> 00:07:17,860
+be C Drive MongoDB and we're going to
+
+174
+00:07:17,860 --> 00:07:22,509
+create a folder here called data alright
+
+175
+00:07:22,509 --> 00:07:24,279
+and then inside the data folder we're
+
+176
+00:07:24,279 --> 00:07:26,229
+going to create another folder called DB
+
+177
+00:07:26,229 --> 00:07:28,569
+this is where all of our data will be
+
+178
+00:07:28,569 --> 00:07:32,559
+stored now we have to also create a
+
+179
+00:07:32,559 --> 00:07:37,199
+log-log folder so it's a new folder log
+
+180
+00:07:37,199 --> 00:07:39,430
+alright and then we need to open up a
+
+181
+00:07:39,430 --> 00:07:41,110
+command line and I haven't installed git
+
+182
+00:07:41,110 --> 00:07:43,029
+bash yet so we'll just use the standard
+
+183
+00:07:43,029 --> 00:07:47,949
+command prompt so it's a CMD and we'll
+
+184
+00:07:47,949 --> 00:07:53,219
+run that as administrator okay and then
+
+185
+00:07:53,219 --> 00:07:55,810
+let's see so I'm going to navigate to
+
+186
+00:07:55,810 --> 00:07:59,370
+that folder so we want to go to CD
+
+187
+00:07:59,370 --> 00:08:04,300
+MongoDB and we actually want to go in
+
+188
+00:08:04,300 --> 00:08:07,029
+the bin folder alright if we look at
+
+189
+00:08:07,029 --> 00:08:09,490
+what's in there oops can't do that
+
+190
+00:08:09,490 --> 00:08:13,930
+there is a vis MongoDB XE that's the
+
+191
+00:08:13,930 --> 00:08:16,990
+main program so we need to run that with
+
+192
+00:08:16,990 --> 00:08:20,139
+some options or some flags so let's say
+
+193
+00:08:20,139 --> 00:08:23,580
+Mongo D and then we're going to do - -
+
+194
+00:08:23,580 --> 00:08:25,839
+let me make this a little bigger so you
+
+195
+00:08:25,839 --> 00:08:29,649
+guys can see it see I haven't done this
+
+196
+00:08:29,649 --> 00:08:31,319
+in a while
+
+197
+00:08:31,319 --> 00:08:35,500
+font let's make it 28 there we go
+
+198
+00:08:35,500 --> 00:08:41,740
+alright so Mongo D directory oops why
+
+199
+00:08:41,740 --> 00:08:45,459
+isn't that typing directory and it's
+
+200
+00:08:45,459 --> 00:08:49,029
+going to be per DB okay directory / DB
+
+201
+00:08:49,029 --> 00:08:52,330
+and then - - DB path
+
+202
+00:08:52,330 --> 00:08:55,360
+and then we want to define that data
+
+203
+00:08:55,360 --> 00:08:57,399
+path that we created so it's going to be
+
+204
+00:08:57,399 --> 00:09:01,959
+in your MongoDB MongoDB folder slash
+
+205
+00:09:01,959 --> 00:09:05,110
+data slash the B okay that's the folder
+
+206
+00:09:05,110 --> 00:09:07,180
+we just created so what we're doing is
+
+207
+00:09:07,180 --> 00:09:09,430
+we're specifying the database path as
+
+208
+00:09:09,430 --> 00:09:11,980
+that folder all right or that location
+
+209
+00:09:11,980 --> 00:09:14,790
+then we need to specify the log path
+
+210
+00:09:14,790 --> 00:09:18,720
+okay so that is going to be C slash
+
+211
+00:09:18,720 --> 00:09:22,779
+MongoDB slash log and it's going to be a
+
+212
+00:09:22,779 --> 00:09:25,540
+file called Hmong Mongo dot log and
+
+213
+00:09:25,540 --> 00:09:28,089
+it'll create that on its own then we
+
+214
+00:09:28,089 --> 00:09:29,529
+just want to add a couple more flags
+
+215
+00:09:29,529 --> 00:09:33,370
+here - - log append
+
+216
+00:09:33,370 --> 00:09:36,750
+we also want to do dash dash rest and
+
+217
+00:09:36,750 --> 00:09:40,120
+dash dash install ok and then that will
+
+218
+00:09:40,120 --> 00:09:42,640
+install it as a service so that it runs
+
+219
+00:09:42,640 --> 00:09:44,500
+in the background we don't have to
+
+220
+00:09:44,500 --> 00:09:46,390
+manually start and stop at all the time
+
+221
+00:09:46,390 --> 00:09:46,990
+and so on
+
+222
+00:09:46,990 --> 00:09:50,010
+so let's go ahead and click enter and
+
+223
+00:09:50,010 --> 00:09:53,680
+next thing we want to do is start the
+
+224
+00:09:53,680 --> 00:09:56,440
+MongoDB service so to do that we can say
+
+225
+00:09:56,440 --> 00:10:02,529
+net start MongoDB okay now it says the
+
+226
+00:10:02,529 --> 00:10:04,779
+services started successfully so that's
+
+227
+00:10:04,779 --> 00:10:07,300
+it MongoDB is now installed it's running
+
+228
+00:10:07,300 --> 00:10:10,089
+and we can now interact with it from
+
+229
+00:10:10,089 --> 00:10:14,260
+from our application so let's go ahead
+
+230
+00:10:14,260 --> 00:10:16,600
+and close that up and then we're going
+
+231
+00:10:16,600 --> 00:10:18,370
+to move on we're going to install Adam
+
+232
+00:10:18,370 --> 00:10:21,040
+which is the text editor so I'm just
+
+233
+00:10:21,040 --> 00:10:24,910
+going to click download all right so
+
+234
+00:10:24,910 --> 00:10:26,290
+once that's done we're just going to
+
+235
+00:10:26,290 --> 00:10:31,750
+open that up and the Adam installer is
+
+236
+00:10:31,750 --> 00:10:33,100
+is really weird because it does
+
+237
+00:10:33,100 --> 00:10:34,990
+everything behind the scenes you'll see
+
+238
+00:10:34,990 --> 00:10:38,290
+this little splash screen and then once
+
+239
+00:10:38,290 --> 00:10:40,029
+it's done it'll just be installed on
+
+240
+00:10:40,029 --> 00:10:45,250
+your system alright Adam is it Adam was
+
+241
+00:10:45,250 --> 00:10:47,980
+actually created with JavaScript it uses
+
+242
+00:10:47,980 --> 00:10:50,740
+electron which is a JavaScript framework
+
+243
+00:10:50,740 --> 00:10:53,140
+that allows you to build desktop
+
+244
+00:10:53,140 --> 00:10:55,630
+applications with JavaScript which is
+
+245
+00:10:55,630 --> 00:10:58,390
+really cool and I do have an intro to
+
+246
+00:10:58,390 --> 00:11:00,790
+electron video if you're interested in
+
+247
+00:11:00,790 --> 00:11:02,499
+that
+
+248
+00:11:02,499 --> 00:11:05,349
+all right so it's installed Adam and
+
+249
+00:11:05,349 --> 00:11:08,049
+started it up I'm just going to get rid
+
+250
+00:11:08,049 --> 00:11:10,149
+of this stuff this is just because I had
+
+251
+00:11:10,149 --> 00:11:12,249
+it installed previously so let me just
+
+252
+00:11:12,249 --> 00:11:14,589
+remove that project and then this is
+
+253
+00:11:14,589 --> 00:11:17,529
+just kind of a welcome screen if you
+
+254
+00:11:17,529 --> 00:11:19,719
+want to open a project install packages
+
+255
+00:11:19,719 --> 00:11:21,489
+and so on but we're going to close all
+
+256
+00:11:21,489 --> 00:11:24,789
+that up and will most likely install
+
+257
+00:11:24,789 --> 00:11:26,319
+some packages but we're going to do that
+
+258
+00:11:26,319 --> 00:11:29,079
+later on all right so we can close that
+
+259
+00:11:29,079 --> 00:11:30,819
+for now and then we're going to move on
+
+260
+00:11:30,819 --> 00:11:33,459
+to install git and get bash so let's
+
+261
+00:11:33,459 --> 00:11:35,139
+click this download for Windows if
+
+262
+00:11:35,139 --> 00:11:36,759
+you're using a Mac you can go to
+
+263
+00:11:36,759 --> 00:11:39,759
+download slash Mac and get this same
+
+264
+00:11:39,759 --> 00:11:45,039
+same program all right so that's going
+
+265
+00:11:45,039 --> 00:11:50,289
+to start it's only 35 megabytes so it
+
+266
+00:11:50,289 --> 00:11:55,299
+shouldn't take too long to download all
+
+267
+00:11:55,299 --> 00:12:02,499
+right so we'll open that up and we're
+
+268
+00:12:02,499 --> 00:12:03,639
+just going to go through this it's going
+
+269
+00:12:03,639 --> 00:12:05,739
+to install it in your Program Files and
+
+270
+00:12:05,739 --> 00:12:08,319
+then for this we'll just leave all the
+
+271
+00:12:08,319 --> 00:12:11,619
+defaults and then when you see this
+
+272
+00:12:11,619 --> 00:12:14,139
+option I always choose this because this
+
+273
+00:12:14,139 --> 00:12:17,049
+will add optional UNIX tools to the
+
+274
+00:12:17,049 --> 00:12:19,899
+regular Windows command prompt so for
+
+275
+00:12:19,899 --> 00:12:22,389
+instance LS you saw that I tried doing
+
+276
+00:12:22,389 --> 00:12:24,189
+that in the regular command line and it
+
+277
+00:12:24,189 --> 00:12:27,759
+didn't work so it'll add that it'll add
+
+278
+00:12:27,759 --> 00:12:29,079
+a whole bunch of stuff so I always
+
+279
+00:12:29,079 --> 00:12:31,149
+choose that and then for the rest of
+
+280
+00:12:31,149 --> 00:12:32,559
+this stuff we're going to leave the
+
+281
+00:12:32,559 --> 00:12:36,239
+default open SSL library that's good
+
+282
+00:12:36,239 --> 00:12:41,919
+windows style click Next Next and enable
+
+283
+00:12:41,919 --> 00:12:43,720
+filesystem caching we'll leave that
+
+284
+00:12:43,720 --> 00:12:46,029
+credential manager we'll leave that and
+
+285
+00:12:46,029 --> 00:12:53,079
+we'll click install all right so that's
+
+286
+00:12:53,079 --> 00:12:54,849
+all set now
+
+287
+00:12:54,849 --> 00:12:57,069
+let's go ahead and click launch git bash
+
+288
+00:12:57,069 --> 00:12:59,769
+and then this is the command-line tool
+
+289
+00:12:59,769 --> 00:13:01,539
+so we can make this bigger with can
+
+290
+00:13:01,539 --> 00:13:03,819
+holding ctrl and then scroll the mouse
+
+291
+00:13:03,819 --> 00:13:06,669
+wheel and just to check to make sure
+
+292
+00:13:06,669 --> 00:13:09,099
+that node is installed we can say node
+
+293
+00:13:09,099 --> 00:13:13,059
+dash B you can see we have version six
+
+294
+00:13:13,059 --> 00:13:14,709
+point seven point three and we can also
+
+295
+00:13:14,709 --> 00:13:15,730
+say NP
+
+296
+00:13:15,730 --> 00:13:22,689
+- B and we have version three point
+
+297
+00:13:22,689 --> 00:13:25,329
+seven point ten so that's it for setting
+
+298
+00:13:25,329 --> 00:13:27,609
+setting up our environment in the next
+
+299
+00:13:27,609 --> 00:13:30,189
+video we're going to start - to build
+
+300
+00:13:30,189 --> 00:13:32,319
+out our application will create our
+
+301
+00:13:32,319 --> 00:13:35,319
+package JSON file and we'll go from
+
+302
+00:13:35,319 --> 00:13:37,410
+there
+

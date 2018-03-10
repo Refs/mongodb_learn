@@ -1,0 +1,66 @@
+
+```bash
+# 查看datbase下面的的集合 
+show collections 
+
+# persons
+# system.indexes
+# 系统自动为我们生成的，负责提供索引的一个文档，当我们插入一个document的时候，mongo会自动为我们的document 增加一个_id 
+
+```
+
+## mongodb的安装
+
+1. 自定义的安装目录
+
+C:\mongodb
+
+2. 在安装目录C:\mongodb下新建目录：
+
+```bash
+#  where all of our data will be stored
+ data  data/db  
+#  our log-log dolder
+ log 
+```
+
+3. 配置mongodb 的启动项
+
+> https://docs.mongodb.com/manual/reference/configuration-options/
+
+Create a folder with the name config in your mongodb directory and a file with the name mongodb.conf in the newly created folder >> (so you should have this arrangement of path) >> C:\mongodb\config\mongodb.conf
+add this to the file mongodb.conf
+
+
+```bash
+systemLog:
+   destination: file
+   path: C:\mongodb\log\mongo.log
+   logAppend: true
+storage:
+   dbPath: C:\mongodb\data\db
+net: 
+   bindIp: 127.0.0.1
+   port: 27017
+setParameter:
+   enableLocalhostAuthBypass: false
+```
+
+run this line of code in CMD
+
+```bash
+mongod --config C:\mongodb\config\mongodb.conf --install
+```
+
+4. start the mongodb server
+
+```bash
+net start mongodb
+
+```
+
+5. start mongodb compass(GUI) to connect to mongodb server 
+
+> 或者自己配置启动文件 
+
+
