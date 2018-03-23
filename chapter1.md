@@ -15,6 +15,13 @@ show collections
 
 C:\mongodb
 
+> 软件安装的时候选择customer 并将软件，安装到此目录；
+
+> 添加 cmder 到右键菜单添加后在任意文件夹中即可打开Cmder，上一步的把 Cmder 加到环境变量就是为此服务的, 在管理员权限的终端输入以下语句即可:
+
+Cmder.exe /REGISTER ALL
+
+
 2. 在安装目录C:\mongodb下新建目录：
 
 ```bash
