@@ -207,3 +207,80 @@ app.listen(3000, function() {
 
 
 ```
+
+
+<!-- a model is a class with which we construct documents. int this case, each document will be a kitten with properties and behavious as declared in our schema. let's create a litten document   -->
+
+##  安装并使用mongoose
+
+```bash
+
+npm install mongoose --save 
+
+```
+
+* 在app.js中实例化我们要操作的数据库；db
+
+```js
+const express = require("express");
+// 引入路径合并模块
+const path = require('path');
+
+const mongoose = require('mongooose');
+
+mongoose.connect('mongodb://locallhost/nodekb');
+
+let db = mongoose.connection;
+
+// init APP
+const app = express();
+
+
+// set view dir
+app.set('views', path.join(__dirname, 'view'));
+// load View Engine
+app.set('view', 'pug');
+
+// Home router
+app.get("/", (req, res) => {
+  // res.send("Hello world");
+  res.render('index')
+});
+
+// start server
+app.listen(3000, function() {
+  console.log("node server in runing on port 3000...");
+});
+
+
+```
+
+* 在项目的目录去新建一个目录modules 在models目录里面新建一个文件article.js
+
+```js
+// 在/models/artical.js中
+
+let mongoose =  require('mongoose');
+
+// Artical Achema
+let articleSchema = mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: String,
+    required: true
+  },
+  body: {
+    type: String,
+    required: true
+  }
+});
+
+let Article = module.exports = mongoose.model('Article', articleSchema)
+
+
+
+```
+ 
