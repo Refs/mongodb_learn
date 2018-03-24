@@ -78,6 +78,31 @@ net start mongodb
 
 electron 用于开发桌面的应用程序；像自己以前接触的软件，现在都可以用此来开发；
 
+6. 使用mongo.exe链接我们的mongo服务，注意以前韶在演示的时候，要打开两个命令行，其中一个是用于开启mongodb的服务，另外一个用于连接mongodb服务 并操作数据库；
+
+```bash
+# connet to mongodb service
+mongo
+# list current database
+show dbs
+# new database nodekb
+use nodekb
+# new collection
+db.createCollection('articles')
+# list current database's collections
+show collections
+# instert document into spec collection - - articles
+db.articles.insert({
+  title: "article one",
+  author: "liu peng",
+  body: "this is article one"
+})
+# list documents of the article collection
+db.articles.find()
+# beautiful the output format
+db.articles.find().pretty()
+
+```
 
 
 ## init our project
