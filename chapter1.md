@@ -167,6 +167,7 @@ var BookSchema = new Schema({
 
 // 关于mongoose.model()方法的第一个参数，有一个坑点， 官方解释： The first argument is the singular name of the collection your model is for. Mongoose automatically looks for the plural version of your model name. Thus, for the example above, the model Tank is for the tanks collection in the database.  即第一个参数是我们模型model所对应的数据库的collection的名字的单数形式，即若collection的名字是employees 则我们的第一个参数应传'Employee' 之所以第一个字母大写 是因为我们的model是一个构造函数，第一个名称应该大写；这是一个容易混淆的地方；
 // 假设我们的数据库中没有名为employees的 collection是，当我们去调用 mongoose.model('Employee',any)方法 并利用方法产生的model去实例化一个document的时候，mongodb 会自动的创建一个 名为employees的collection 以 与我们的操作相对应； 这就是两者的对应关系；
+// 我们也可以去通过向mongoose.Schema() 方法中去传递参数，以指定我们要使用的collection  var dataSchema = new Schema({..}, { collection: 'data' }); 这样通过dataSchema compile的model 就会默认的使用 data  collection
 var EmployeeModel = mongoose.model('EmployeeModel');
 
 // 2. retrive doc from dbs; find is a asynchronous function , node.js server or node.js fole is running in its little process and need to communicate with a different process where the Mongo database is running  
