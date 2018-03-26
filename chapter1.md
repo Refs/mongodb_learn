@@ -136,6 +136,21 @@ db.articels.remove({
 
 ```
 
+## mongoose
+
+* start by three line code
+
+```js
+// app.js中
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://locallhost/test',{
+
+});
+
+mongoose.Promise = global.Promise;
+
+```
 
 ## init our project
 
@@ -161,7 +176,6 @@ npm init
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-// we can get rid of the test and let's say start  we just put the command we want to run
   "scripts": {
     //"test": "echo \"Error: no test specified\" && exit 1"
     "start": "node app"
