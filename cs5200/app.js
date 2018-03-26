@@ -29,13 +29,13 @@ db.once('open', ()=>{
 });
 
 
-var promiseFactory = () => {
+var findPromiseFactory = () => {
   return EmployeeModel.find();
 }
 
-var promise = promiseFactory();
+var findPromise = findPromiseFactory();
 
-promise.then(
+findPromise.then(
   (data)=>{
     console.log(data);
   },
@@ -44,6 +44,18 @@ promise.then(
   }
 )
 
+// delete doc by _id
+var deletePromiseFactory = (employeeId) => {
+  return EmployeeModel.remove({
+    _id: employeeId
+  })
+}
+
+deletePromiseFactory('5ab89f8adb098428e84eeccf').then(
+  (status) =>{
+    console.log(status);
+  }
+)
 
 
 
