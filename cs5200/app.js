@@ -11,9 +11,10 @@ var employeeSchema = new Schema({
   password: String,
   firstName: String,
   lastName: String
-});
+},{collection:'employees'});
+// var dataSchema = new Schema({..}, { collection: 'data' });
 
-var Employee = mongoose.model('Employee',employeeSchema);
+var EmployeeModel = mongoose.model('EmployeeModel',employeeSchema);
 
 var db = mongoose.connection;
 db.on('error', ()=>{
@@ -24,7 +25,7 @@ db.once('open', ()=>{
     console.log('the databse is already opened!')
 });
 
-var bob = new Employee({
+var bob = new EmployeeModel({
   username: 'bob',
   password: '123',
   firstName: 'b',
@@ -36,5 +37,13 @@ var bob = new Employee({
       console.log(data);
     }
 })
+
+EmployeeModel.find((err,data)=>{
+  if(err){
+    console.log(err);
+  }else{
+    console.log(data)
+  }
+});
 
 
