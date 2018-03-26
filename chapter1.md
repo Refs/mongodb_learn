@@ -191,6 +191,16 @@ function findAllEmployees() {
 var employeeFindPromise = findAllEmployees();
 
 // 4 register promise's callback function
+employeeFindPromise.then(
+  (data)=>{
+    console.log(data);
+  },
+  (err)=>{
+    console.log(err);
+  }
+)
+// 简写形式： findAllEmployees().then((data)=>{console.log(data)});
+
 
 
 
