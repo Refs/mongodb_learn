@@ -150,7 +150,24 @@ mongoose.connect('mongodb://locallhost/test',{
 
 mongoose.Promise = global.Promise;
 
-```
+// 1. Schema 
+var Schema = mongoose.Schema;
+
+var BookSchema = new Schema({
+  username: String,
+  password: String,
+  firstName: String,
+  lastName: String
+  // we can spec the collection this data is being stored is in a collection called employee;
+},{collection: 'employee'})
+
+// 2. Model : The model is going to be the object that is going to allow us to starting interacting with the database;  it allow us to send commands to database just like we would  if we are in command line ,that is about create document, find documents, update documents and remove documents
+
+// 关于mongoose.model()方法的第一个参数，有一个坑点， 官方解释： The first argument is the singular name of the collection your model is for. Mongoose automatically looks for the plural version of your model name. Thus, for the example above, the model Tank is for the tanks collection in the database.  即第一个参数是我们模型model所对应的数据库的collection的名字的单数形式，即若collection的名字是employees 则我们的第一个参数应传'Employee' 之所以第一个字母大写 是因为我们的model是一个构造函数，第一个名称应该大写；这是一个容易混淆的地方；
+// 假设我们的数据库中没有名为employees的 collection是，当我们去调用 mongoose.model('Employee',any)方法 并利用方法产生的model去实例化一个document的时候，mongodb 会自动的创建一个 名为employees的collection 以 与我们的操作相对应； 这就是两者的对应关系；
+var employeeModel = mongoose.model('EmployeeModel')
+
+``` 
 
 ## init our project
 
