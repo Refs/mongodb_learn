@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+
+// utilize the es6 prmise in our mongoose app;
+mongoose.Promise = global.Promise;
 var db = 'mongodb://localhost:27017/nodekb';
 
 mongoose.connect(db)
@@ -25,25 +28,24 @@ db.once('open', ()=>{
     console.log('the databse is already opened!')
 });
 
-var bob = new EmployeeModel({
-  username: 'bob',
-  password: '123',
-  firstName: 'b',
-  lastName:'ob'
-}).save((err,data) => {
-    if(err){
-      console.log(err);
-    }else{
-      console.log(data);
-    }
-})
 
-EmployeeModel.find((err,data)=>{
-  if(err){
-    console.log(err);
-  }else{
-    console.log(data)
+var promiseFactory = () => {
+  return EmployeeModel.find();
+}
+
+var promise = promiseFactory();
+
+promise.then(
+  (data)=>{
+    console.log(data);
+  },
+  (error)=>{
+    console.log(error);
   }
-});
+)
+
+
+
+
 
 

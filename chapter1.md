@@ -179,13 +179,19 @@ mongoose.Promise = global.Promise;
 // 官方文档 ： http://mongoosejs.com/docs/promises.html
 
 
+
 function findAllEmployees() {
   // 返回的是一个promise, 与以往的使用场景一样，函数调用后 会被立即执行：
   //  the find method send out the request to the database server , node.js thread(线程) 
   return EmployeeModel.find();
 }
-// what we actrually get back is not the actural array of emplloyees , instead what we get back is what is called promise; remember all this communication is asynchromous won't wait for the database to response , instead it keeps going , and what it's response is a promise ; 即函数被调用后，立即执行，虽然函数体内部有异步请求的调用，但函数不会等待一部返回，而是`直接返回一个promise对象，然后继续执行； 这样就变异步为同步了；
-var employees = findAllEmployees();
+// what we actrually get back is not the actural array of emplloyees , instead what we get back is what is called promise; remember all this communication is asynchromous won't wait for the database to response , instead it keeps going , and what it's response is a promise ; 即函数被调用后，立即执行，虽然函数体内部有异步请求的调用，但函数不会等待一部返回，而是`直接返回一个promise对象，,然后继续执行； 我们拿到这个方法返回的promise 之后，就去在promise上面去注册(注意是注册而不是立即执行)几个callback函数，然后就直接过了；  
+// 调用find()方法，实质上是向mongodb服务器发送请求；只不过其是将这些过程都封装了；
+// 学会这种promise 工厂函数的写法， 以后遇到的时候，直接去用就可以了； 这种promise 工厂函数的写法很优雅；
+var employeeFindPromise = findAllEmployees();
+
+// 4 register promise's callback function
+
 
 
 
@@ -373,3 +379,4 @@ let Article = module.exports = mongoose.model('Article', articleSchema)
 
 
 > 重要库： mongoose tutorial course: https://github.com/jakblak/nodeJS_examples/blob/master/mongoose/app2.js
+>  mongoose 主要跟的课程cs5200： https://www.youtube.com/watch?v=5J4pD2sYe9I&t=629s  
