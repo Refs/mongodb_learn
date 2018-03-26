@@ -180,9 +180,11 @@ mongoose.Promise = global.Promise;
 
 
 function findAllEmployees() {
+  // 返回的是一个promise, 与以往的使用场景一样，函数调用后 会被立即执行：
+  //  the find method send out the request to the database server , node.js thread(线程) 
   return EmployeeModel.find();
 }
-// what we actrually get back is not the actural array of emplloyees , instead what we get back is what is called promise; remember all this communication is asynchromous 
+// what we actrually get back is not the actural array of emplloyees , instead what we get back is what is called promise; remember all this communication is asynchromous won't wait for the database to response , instead it keeps going , and what it's response is a promise ; 即函数被调用后，立即执行，虽然函数体内部有异步请求的调用，但函数不会等待一部返回，而是`直接返回一个promise对象，然后继续执行； 这样就变异步为同步了；
 var employees = findAllEmployees();
 
 
