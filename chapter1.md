@@ -1,11 +1,11 @@
 
 ```bash
-# 查看datbase下面的的集合 
-show collections 
+# 查看datbase下面的的集合
+show collections
 
 # persons
 # system.indexes
-# 系统自动为我们生成的，负责提供索引的一个文档，当我们插入一个document的时候，mongo会自动为我们的document 增加一个_id 
+# 系统自动为我们生成的，负责提供索引的一个文档，当我们插入一个document的时候，mongo会自动为我们的document 增加一个_id
 
 ```
 
@@ -26,9 +26,9 @@ Cmder.exe /REGISTER ALL
 
 ```bash
 #  where all of our data will be stored
- data  data/db  
+ data  data/db
 #  our log-log dolder
- log 
+ log
 ```
 
 3. 配置mongodb 的启动项
@@ -52,7 +52,7 @@ systemLog:
    logAppend: true
 storage:
    dbPath: C:\mongodb\data\db
-net: 
+net:
    bindIp: 127.0.0.1
    port: 27017
 setParameter:
@@ -65,6 +65,10 @@ run this line of code in CMD
 mongod --config C:\mongodb\config\mongodb.conf --install
 ```
 
+> error:  when starting mongod.exe, getting error of missing api-ms-win-crt-runtime-l1-1-0.dll
+> https://stackoverflow.com/questions/43165669/when-starting-mongod-exe-getting-error-of-missing-api-ms-win-crt-runtime-l1-1-0
+>  遇到更新不能安装，很可能是自己将windows update 的服务关闭了，打开方式win + r--> services.msc --> windows update 服务开启；
+
 4. start the mongodb server
 
 ```bash
@@ -72,9 +76,9 @@ net start mongodb
 
 ```
 
-5. start mongodb compass(GUI) to connect to mongodb server 
+5. start mongodb compass(GUI) to connect to mongodb server
 
-> 或者自己配置启动文件 
+> 或者自己配置启动文件
 
 electron 用于开发桌面的应用程序；像自己以前接触的软件，现在都可以用此来开发；
 
@@ -102,12 +106,40 @@ db.articles.find()
 # beautiful the output format
 db.articles.find().pretty()
 
+# involve find method with a filter
+db.articles.find({title: "article one"});
+
+# uupdate method
+# the first parameter ,the first JSON object is treat as the filter
+# the second param is used as the actrual update data you want to change;
+db.articles.update()
+db.articles.uptdate({title: "article one"},{
+  title: "article one uptdate"
+})
+# with $set
+# this is mean this is a not a field , should not be interpreted as fuel instead it is interpreted as  a command
+# $set is one of the mommon ones that i want to set the following field or fields | 即我们要改变的仅仅是一个doc的单个 字段， 而非是整个doc;
+db.articles.update({title: "article one"},{
+  $set:{
+    title: "article one updaate with set"
+  }
+})
+
+# remove operator
+db.articles.remove() # don't do anything
+# remove any documnet of the spec collections
+db.articles.remove({})
+# invoce the remove method with a filter
+db.articels.remove({
+  title: "article one"
+})
+
 ```
 
 
 ## init our project
 
-### config package.json file 
+### config package.json file
 
 ```bash
 
@@ -129,7 +161,7 @@ npm init
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-// we can get rid of the test and let's say start  we just put the command we want to run 
+// we can get rid of the test and let's say start  we just put the command we want to run
   "scripts": {
     //"test": "echo \"Error: no test specified\" && exit 1"
     "start": "node app"
@@ -146,7 +178,7 @@ npm install express --save
 
 ```
 
-> 测试 
+> 测试
 
 ```js
 const express = require('express');
@@ -215,7 +247,7 @@ app.listen(3000, function() {
 
 ```bash
 
-npm install mongoose --save 
+npm install mongoose --save
 
 ```
 
@@ -283,4 +315,3 @@ let Article = module.exports = mongoose.model('Article', articleSchema)
 
 
 ```
- 
