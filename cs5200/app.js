@@ -32,30 +32,53 @@ db.once('open', ()=>{
 var findPromiseFactory = () => {
   return EmployeeModel.find();
 }
-
-var findPromise = findPromiseFactory();
-
-findPromise.then(
-  (data)=>{
-    console.log(data);
-  },
-  (error)=>{
-    console.log(error);
-  }
-)
-
-// delete doc by _id
-var deletePromiseFactory = (employeeId) => {
-  return EmployeeModel.remove({
-    _id: employeeId
-  })
+var createPromiseFactory = (employee) => {
+  return EmployeeModel.create(employee);
 }
 
-deletePromiseFactory('5ab89f8adb098428e84eeccf').then(
-  (status) =>{
-    console.log(status);
+// var findPromise = findPromiseFactory();
+
+// findPromise.then(
+//   (data)=>{
+//     console.log(data);
+//   },
+//   (error)=>{
+//     console.log(error);
+//   }
+// )
+
+// delete doc by _id
+// var deletePromiseFactory = (employeeId) => {
+//   return EmployeeModel.remove({
+//     _id: employeeId
+//   })
+// }
+
+// deletePromiseFactory('5ab89f8adb098428e84eeccf').then(
+//   (status) =>{
+//     console.log(status);
+//   }
+// )
+
+var Jim = {
+  username: 'Jim',
+  password: 'Jim123',
+  firstName: 'Aster',
+  lastName: 'Ding'
+}
+
+createPromiseFactory(Jim).then(
+  (response) => {
+    console.log(response);
+    return findPromiseFactory()
+  }
+).then(
+  (response) => {
+    console.log(response);
   }
 )
+
+// 我们每执行一次命令实际上都是在向mongo服务器去发送请求；和我们平时上网都是一样的，
 
 
 

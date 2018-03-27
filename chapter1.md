@@ -201,9 +201,79 @@ employeeFindPromise.then(
 )
 // 简写形式： findAllEmployees().then((data)=>{console.log(data)});
 
+// 5. 通过_id 去删除document
 
+function deleteEmployee(employeeId){
+  return EmployeeModel.remove({
+    _id: employeeId
+  })
+}
 
+deleteEmployee('5ab89881c562011e74ac5223').then(
+  (status)=>{
+    // the status information saying whether it was successfull or not and how many doc have removed.
+    console.log(status);
+  }
+)
 
+// 6. insert a document to our employees collection
+
+function createEmployee(employee) {
+  return EmployeeModel.create(employee);
+}
+
+var dan = {
+  username: 'dan',
+  password: 'dan123',
+  firstName: 'Daniel',
+  lastName: 'Craig'
+}
+
+createEmployee(dan)
+  .then(
+    (response)=>{
+      console.log(response);
+    }
+  )
+
+// 7. create and nested promise;
+
+// retrive all employeee from our collection, after we create a new document, note that both process are asynchronouse , we have to make sure , the ctreate operation is processed before retrive operation;
+// what we will do is to sycchronize these that we want to force a particular order 
+
+// release #1 :  to straightly put retrive block in to the callback , 方式1 是直接将上面的查询操作，放到then的毁掉函数中去， 虽然这样可以实现，但是不够优雅
+createEmployee(dan)
+  .then(
+    (response)=>{
+      console.log(response);
+      // retruve all data
+      findAllEmployees()
+        .then(
+          (response) => {
+            console.log(response);
+          }
+        )
+  }
+)
+
+// releate #2 利用`链式操作的思想去优雅的操作，promise 的嵌套逻辑`， promise代码优雅的两种方式： ==> 工厂函数与链式嵌套：
+// 链式嵌套的实质是，在一个promise中去返回另外一个promise;
+
+createEmployee(dan)
+  .then(
+    (response) => {
+      console.log(response);
+      return findAllEmployees()
+    }
+  )
+  .then(
+    (response) => {
+      console.log(response);
+      // 如果我们还想在create 与 query操作之后，进行其它的操作，可以类似于上述的方式，继续return 一个promise, 然后继续链式操作，而不是直接将操作，真的嵌套在函数体里面； 这样的代码，看起来优雅 整洁；
+    }
+  )
+
+// 8. update a spec document;
 
 
 ``` 
