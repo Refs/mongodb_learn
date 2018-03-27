@@ -60,23 +60,41 @@ var createPromiseFactory = (employee) => {
 //   }
 // )
 
-var Jim = {
-  username: 'Jim',
-  password: 'Jim123',
-  firstName: 'Aster',
-  lastName: 'Ding'
+// var Jim = {
+//   username: 'Jim',
+//   password: 'Jim123',
+//   firstName: 'Aster',
+//   lastName: 'Ding'
+// }
+
+// createPromiseFactory(Jim).then(
+//   (response) => {
+//     console.log(response);
+//     return findPromiseFactory()
+//   }
+// ).then(
+//   (response) => {
+//     console.log(response);
+//   }
+// )
+
+function updateEmployee(employeeId, newEmployee) {
+  return  EmployeeModel.update(
+    {_id: employeeId},
+    {$set: newEmployee}
+  )
 }
 
-createPromiseFactory(Jim).then(
-  (response) => {
-    console.log(response);
-    return findPromiseFactory()
-  }
-).then(
-  (response) => {
-    console.log(response);
-  }
-)
+var newEd = {
+  firstName: 'Edward'
+}
+
+updateEmployee('5ab89f981fd88324f837310d',newEd)
+  .then(
+    (response) => {
+      console.log(response);
+    }
+  )
 
 // 我们每执行一次命令实际上都是在向mongo服务器去发送请求；和我们平时上网都是一样的，
 

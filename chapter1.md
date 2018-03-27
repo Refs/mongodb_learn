@@ -273,11 +273,62 @@ createEmployee(dan)
     }
   )
 
-// 8. update a spec document;
+// 8. update a spec document; we can use the employeeId filter to query our document, and use newEmployee json object which contain all field we want update.
 
+function updateEmployee(employeeId, newEmployee) {
+  return  EmployeeModel.update(
+    {_id: employeeId},
+    {$set: newEmployee}
+  )
+}
+
+var newEd = {
+  firstName: 'Edward'
+}
+
+updateEmployee('5ab89f981fd88324f837310d',newEd)
+  .then(
+    (response) => {
+      console.log(response);
+    }
+  )
+
+// 9 nest promise findEmployeeById()
+updateEmployee('5ab89f981fd88324f837310d',newEd)
+  .then(
+    (response) => {
+      console.log(response);
+      return findEmployeeById('5ab89f981fd88324f837310d')
+    }
+  )
+  .then(
+    (response) => {
+      console.log(response);
+    }
+  )
 
 ``` 
-机箱 显卡 cpu 固态硬盘 内存 电源 
+
+### 重构上面的代码，并打包成模块，以能在其它的项目中去重用；
+
+> one of the good practices is we split up above file into several dedicated files ;
+
+```bash
+
+mkdir models
+# it's very common thing to hace a schema file
+# maybe the client and the server have their own schemas . to differentiaate for that and make it explicit this is a schema 
+
+touch employee.schema.server.js
+
+vi employee.schema.server.js
+
+
+
+
+```
+
+
 
 ## init our project
 
