@@ -323,6 +323,7 @@ touch employee.schema.server.js
 
 vi employee.schema.server.js
 
+~ var mongoose = require('mongoose');
 ~ var schema = mongoose.Schema;
 ~ 
 ~ var employeeSchema = new Schema({
@@ -374,8 +375,57 @@ vi employee.model.server.js
 ~ # export our  ultimate model;
 ~ moduel.exports = EmployeeModel;
 
+vi app.js
+
+~ var mongoose = require('mongoose');
+~ 
+~ var db = 'mongodb://localhost:27017/nodekb';
+~ 
+~ # import our model
+~ var EmployeeModel =  require('./models/employee.model.server')
+~ 
+~ mongoose.connect(db)
+~ 
+~ mongoose.Promise = global.Promise;
+~ 
+~ # try our model
+~ EmployeeModel.findAllEmployees()
+~   .then(
+~     (response) => {
+~       console.log(response);
+~     }
+~   )
+~ 
+
 
 ```
+
+> 建好的model 实际上就建好了我们的数据层；
+
+```js
+// in server.js
+
+const express = require('express');
+const app = express();
+
+// the req prameter that is coming from the clients tells me everything about the client that their Ip address , the timestamp(时间戳) when the request occured , any cookies that they mignt providing , etc everything from the client 
+// 即上面要表达的意思就是，我们要从客户端 获取的一切东西，都来自于这个req参数，缺什么都找它去要，一定要有这样一个认识；
+app.get('/',(req, res) => {
+    res.send('Hello world');
+})
+
+app.listen(3000,function(){
+    console.log('node server in runing on port 3000...')
+})
+
+
+
+```
+
+
+## 结合express 与 我们的mongodb 数据库的使用；
+
+
 
 
 
