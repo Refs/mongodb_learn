@@ -3,16 +3,21 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { EmployeeServiceClient } from './services/employee.service.client';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    EmployeeServiceClient
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
