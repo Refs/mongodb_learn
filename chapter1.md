@@ -524,7 +524,7 @@ export class EmployeeServiceClient {
 
 
 > 实际上一个项目有三个服务器 客户端 服务端 数据库， 有人后台的就是服务端与前台的交互，所以前端做的事情，其也会做一部分， 而有的后台做的是与数据库的交互，就是所谓的写接口了；
-
+> https://www.youtube.com/watch?v=MjFLBBwNULA&index=53&list=PL_GGiAMracOUd0dRb-yUXsZMWLgWNjxFh  进行不下去了，因为代码angular 5 关于hhtp这一块，改版了。
 
 
 

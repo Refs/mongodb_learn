@@ -5,22 +5,23 @@ import 'rxjs/RX';
 import 'rxjs/add/operator/map';
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export  class EmployeeServiceClient {
     // tslint:disable-next-line:no-trailing-whitespace
     
-    constructor( private http: Http) {
-
-    }
-    findAllEmployees: any () {
+    findAllEmployees () {
         const url = 'http://localhost:3000/api/employee';
         this.http.get(url)
             .map(
                  (response: Response) => {
-                     response.json();
+                    return response.json() as Observable<any> ;
                 }
             );
+    }
+    constructor( private http: Http) {
+
     }
 
 }
