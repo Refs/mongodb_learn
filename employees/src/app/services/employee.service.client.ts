@@ -9,7 +9,7 @@ export  class EmployeeServiceClient {
     // tslint:disable-next-line:no-trailing-whitespace
     
     findAllEmployees () {
-        const url = 'http://localhost:3000/api/employee';
+        const url = 'http://localhost:3000/api/employees';
         return this.http.get(url)
             .map(
                  (response: Response) => {

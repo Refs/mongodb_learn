@@ -1,23 +1,27 @@
-var mongoose =  require('mongoose');
+module.exports = function(app) {
 
-// 输不对 就去官方文档上面去粘
-var dbPath = 'mongodb://localhost:27017/nodekb';
+    var mongoose =  require('mongoose');
+    
+    // 输不对 就去官方文档上面去粘
+    var dbPath = 'mongodb://localhost:27017/nodekb';
+    
+    mongoose.connect(dbPath);
+    
+    mongoose.Promise = global.Promise;
+    
+    var EmployeeModel =  require('./models/employee.model.server');
+    
+    app.get('/api/employees',findAllEmployees);
 
-var EmployeeModel =  require('./models/employee.model.server');
+    function findAllEmployees(req,res) {
 
-mongoose.connect(dbPath);
+        EmployeeModel.findAllEmployees()
+            .then(
+                (response) =>{
+                    console.log(response);
+                }
+            )
+            
+    }
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('fasdfasdfasdfasd')
-});
-
-mongoose.Promise = global.Promise;
-
-EmployeeModel.findAllEmployees()
-    .then(
-        (response) =>{
-            console.log(response);
-        }
-    )
+}
