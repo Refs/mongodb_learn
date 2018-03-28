@@ -1,11 +1,8 @@
 
-import { Http, Response } from '@angular/http';
-
+import { HttpClient } from '@angular/common/http';
+import { Response } from '@angular/http';
 import 'rxjs/RX';
-import 'rxjs/add/operator/map';
-
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export  class EmployeeServiceClient {
@@ -13,14 +10,14 @@ export  class EmployeeServiceClient {
     
     findAllEmployees () {
         const url = 'http://localhost:3000/api/employee';
-        this.http.get(url)
+        return this.http.get(url)
             .map(
                  (response: Response) => {
-                    return response.json() as Observable<any> ;
+                  return  response.json();
                 }
             );
     }
-    constructor( private http: Http) {
+    constructor( private http: HttpClient) {
 
     }
 

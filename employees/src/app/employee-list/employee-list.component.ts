@@ -7,12 +7,21 @@ import 'rxjs/RX';
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
+// tslint:disable-next-line:component-class-suffix
 export class EmployeeListComponent implements OnInit {
+
+  employees: [any];
 
   constructor( private employeeService: EmployeeServiceClient ) { }
 
   ngOnInit() {
-    const a = this.employeeService.findAllEmployees();
+    this.employeeService.findAllEmployees()
+      .subscribe({
+        next: (employees: [any]) => {
+          this.employees = employees;
+        }
+      });
+
   }
 
 }
