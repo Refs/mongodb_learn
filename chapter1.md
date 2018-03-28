@@ -471,20 +471,48 @@ cd src/app/services
 # corresponding to employee.model.server.js ,this file is client side;
 touch employee.service.client.ts
 
-import { http } from "@angular/http";
+import { http,  Response } from "@angular/http";
 
-class EmployeeServiceClient {
+import 'rxjs/RX';
+
+import{ Injectable } from '@angular/core';
+
+# we'd like to inject EmployeeServiceClient into other folks if we want to use it's mrthod, to  dot that we're going to decorate this as an injectable
+@injectble()
+# and then to inject this class in other component, we alse need register this as a provider, let's do it ;
+# 在 app.module.ts 中 在poviders 数组里面，去声明这一个自定义的类；providers:[ EmployeeServiceClient ]
+# 这个自定义，可注入模块的流程自己应该熟悉掌握；；
+
+# wrap EmployeeServiceClient through wxport as a module, so it can be import by other folks
+export class EmployeeServiceClient {
 
   # 所谓的客户端就是用来发送请求与接收数据的，类似于 curl in linux;
   # we'd call this function locally from our code and then this goes out and fetched data from the server 
+
+  # we need to load a couple of libraries that allow us to generate HTTP GET requests . all those requests : gets | puts| posts | delete ，etc live in a service called the HTTP service and encapsulate everything to do with HTTP, dealing with cookies, dealing with HTTP bodies , dealing with headers, dealing with everything .
+  # inject the HTTP service to our component.
+  constructor(private http: Http) {
+
+  }
   findAllEmployees() {
     const url = 'http://localhost:3000/api/employee';
 
-    # we need to load a couple of libraries that allow us to generate HTTP GET requests . all those requests : gets | puts| posts | delete ，etc live in a service called the HTTP service and encapsulate everything to do with HTTP, dealing with cookies, dealing with HTTP bodies , dealing with headers, dealing with everything .
-    # inject the HTTP service to our class.
-    constructor(private http: Http) {
-      
-    }
+    # utilize http service to generate a get request;
+    # make sense that this process is going to be asynchronous that get request is going to be just the same problem we had of the node server communicating with database, 即我们去调用Model.uodate()实际上是向mongodb数据库去发送请求，而此处我们调用http.get()方法实际上是向node服务器发送请求；都是异步的；
+    # 这个文件的employee.service.client.ts 在项目中充当的角色实际上是和实际上和employee.model.server.js 充当的角色是一样的，都是负责发送请求，当无非一个是在server a端，一个实在client 端，这个认识很重要；
+    this.http.get(url)
+
+    # above code generate a asynchronous call we need to subscribe to this event when it comes back from server.
+    # we need to load rxjs library that knoe how to parse all this communication back and the handshaking between the client and server all that is implemented inside of the Rxjs
+    # the rxjs give us a more powerful version of promise , a  promise allow us to deal with just one response. 
+    # angular has a more sophisticated mechanism that allow us to return any number of promises right    
+    return this.http.get(url)
+      .map(
+        (response: Response) => {
+          return response.json(response);
+        }
+      )
+
   }
 }
 
@@ -495,6 +523,7 @@ class EmployeeServiceClient {
 ```
 
 
+> 实际上一个项目有三个服务器 客户端 服务端 数据库， 有人后台的就是服务端与前台的交互，所以前端做的事情，其也会做一部分， 而有的后台做的是与数据库的交互，就是所谓的写接口了；
 
 
 
