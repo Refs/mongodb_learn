@@ -405,8 +405,10 @@ vi app.js
 
 ```bash
 
-# app.js的文件本身就是一个模块，我们利用一个module.exports 将想要暴露的东西，暴露出去；
+# // 其实除了入口文件之外，其它的全部文件都可以看做是一个模块，node是单线程的，他们都是node 在运行的过程中 加载过来的， 即除了入口文件之外的其它任何文件，都要向外去暴露一些东西；
+# app.js的文件并不是一个入口文件，其也是在入口文件运行的过程中，被加载进来的，即其本身就是一个模块，所以我们要利用一个module.exports 将想要暴露的东西，暴露出去；
 # 一般的处理思路，若模块的文件中 是多个方法，一般是将其挂载到某一个对象中， 并暴露这个对象到外面； 而模块文件中主要是 是几个操作步骤（操作逻辑）如下， 则就将其封装到一个带有参数的函数中，参数可以用来接收从外界传递过来的值； 一般这样处理，代码就看起来很优雅了；
+# 我们将其作为一个函数流程暴露出去；
 
 # we want to put all code inside of a function and then we're going to exports this so that it can be required from outfile ; the function will receive a argument ,whatever we're passed from outside file; 
 # 此处我们要传的是 实例化后的express 对象； var app = express();
