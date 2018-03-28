@@ -397,8 +397,63 @@ vi app.js
 ~   )
 ~ 
 
+```
+
+### 重构最顶层的app.js 以使其能够作为一个module在其它文件中去引用；主要用来接收最顶层server.js中出传递过来的app实例；
+
+> 关键是要学习，这种松耦合的处理方式
+
+```bash
+
+# app.js的文件本身就是一个模块，我们利用一个module.exports 将想要暴露的东西，暴露出去；
+# 一般的处理思路，若模块的文件中 是多个方法，一般是将其挂载到某一个对象中， 并暴露这个对象到外面； 而模块文件中主要是 是几个操作步骤（操作逻辑）如下， 则就将其封装到一个带有参数的函数中，参数可以用来接收从外界传递过来的值； 一般这样处理，代码就看起来很优雅了；
+
+# we want to put all code inside of a function and then we're going to exports this so that it can be required from outfile ; the function will receive a argument ,whatever we're passed from outside file; 
+# 此处我们要传的是 实例化后的express 对象； var app = express();
+module.exports = function(app) {
+  var mongoose = require('mongoose');
+
+  var db = 'mongodb://localhost:27017/nodekb';
+
+  var EmployeeModel =  require('./models/employee.model.server')
+
+  mongoose.connect(db)
+
+  mongoose.Promise = global.Promise;
+
+  # find all employees through express web service
+  app.get('/api/employee',findAllEmployees);
+
+  function findAllEmployees (req,res) {
+    EmployeeModel.findAllEmployees()
+      .then(
+        (employees) => {
+          res.send(employees);
+        }
+      )
+  }
+}
 
 ```
+
+### server.js中
+
+> 这个文件只负责提供服务，路由在上面中server/app.js 去使用, 在里面去写数据调用的逻辑；
+
+```js
+var express =  require('express');
+var app = express();
+
+// import app.js above, and I am going to pass in it app which is the instance of express above;
+require('./server/app')(app);
+
+app.listen(3000);
+
+```
+
+
+
+
 
 > 建好的model 实际上就建好了我们的数据层；
 
