@@ -323,7 +323,56 @@ touch employee.schema.server.js
 
 vi employee.schema.server.js
 
+~ var schema = mongoose.Schema;
+~ 
+~ var employeeSchema = new Schema({
+~   username: String,
+~   password: String,
+~   firstName: String,
+~   lastName: String
+~ },{collection: 'employee'})
+~ 
+~ module.exports = employeeSchame
 
+touch employee.model.server.js
+vi employee.model.server.js
+
+~ var employeeSchema =  require('./employee.schema.server')
+~ var mongoose = require('mongoose')
+~ var EmployeeModel = mongoose.model('EmployeeModel',EmployeeSchema);
+~ 
+~ function findAllEmployees() {
+~   return EmployeeModel.find();
+~ }
+~ 
+~ function deleteEmployee(employeeId){
+~   return EmployeeModel.remove({
+~     _id: employeeId
+~   })
+~ }
+~ 
+~ function createEmployee(employee) {
+~   return EmployeeModel.create(employee);
+~ }
+~ 
+~ function updateEmployee(employeeId, newEmployee) {
+~   return  EmployeeModel.update(
+~     {_id: employeeId},
+~     {$set: newEmployee}
+~   )
+~ }
+~
+~ # now we want make above file reuseable . we need make all these functions available to the outside world . the thing is that module exports only allows you to export one single object .
+~ # we're going to group all these functions into one single object and then we'll export that onject 
+# we can use EmployeeModel as container of all these functions, so the EmployeeModel we'll exports to outsider will contain our custom method above plus the other method that inherit form Mongoose Model.
+~
+~ EmployeeModel.findAllEmployees = findAllEmployees;
+~ EmployeeModel.deleteEmployee = deleteEmployee;
+~ EmployeeModel.createEmployee = createEmployee;
+~ EmployeeModel.updateEmployee = updateEmployee;
+~
+~ # export our  ultimate model;
+~ moduel.exports = EmployeeModel;
 
 
 ```
