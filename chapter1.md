@@ -453,6 +453,67 @@ app.listen(3000);
 
 > 在实际的项目中 服务器 客户端  数据库都是运行在不同的沈北上面的；
 
+
+## join the angular to use our node service and mongodb database codes above
+
+> the app.js li litening for API employee, is our web service and is listening for get request; in the angular project we need to generate hte URL request to the API.  but programmatically we knoe how to do it manually that's easy. I jst typing the URL and I can do it manually, but we want to generate this URL dynamically  
+
+```bash
+# in the angular project 
+
+ng g employee-list
+
+# in the services folder we need to write a client to generate the HTTP request to our web server.
+mkdir src/app/services
+
+cd src/app/services
+
+# corresponding to employee.model.server.js ,this file is client side;
+touch employee.service.client.ts
+
+import { http } from "@angular/http";
+
+class EmployeeServiceClient {
+
+  # 所谓的客户端就是用来发送请求与接收数据的，类似于 curl in linux;
+  # we'd call this function locally from our code and then this goes out and fetched data from the server 
+  findAllEmployees() {
+    const url = 'http://localhost:3000/api/employee';
+
+    # we need to load a couple of libraries that allow us to generate HTTP GET requests . all those requests : gets | puts| posts | delete ，etc live in a service called the HTTP service and encapsulate everything to do with HTTP, dealing with cookies, dealing with HTTP bodies , dealing with headers, dealing with everything .
+    # inject the HTTP service to our class.
+    constructor(private http: Http) {
+      
+    }
+  }
+}
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 > 建好的model 实际上就建好了我们的数据层；
 
 ```js
