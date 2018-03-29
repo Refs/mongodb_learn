@@ -777,3 +777,9 @@ let Article = module.exports = mongoose.model('Article', articleSchema)
 
 > 重要库： mongoose tutorial course: https://github.com/jakblak/nodeJS_examples/blob/master/mongoose/app2.js
 >  mongoose 主要跟的课程cs5200： https://www.youtube.com/watch?v=5J4pD2sYe9I&t=629s  
+
+
+
+> employee.service.client.ts 文件存在的意义；
+
+> we injected private HTTP directly in the component , in the futrue we want to use HTTP and abstract it into a service , where we want to use HTTP ; we don't want to inject straghtly into the component , the component itself should not be concerned with how it gets data ,it just needs to know that it uses a service to get data , and the service is going to be what is reponsible for implementing the data getting and data creation or whatever we need to with our API 

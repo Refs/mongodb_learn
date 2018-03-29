@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeServiceClient } from './../services/employee.service.client';
-import 'rxjs/RX';
+// import 'rxjs/RX';
+// import { map } from 'rxjs/operator';
+// import { map } from 'rxjs/operator/map';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,17 +12,17 @@ import 'rxjs/RX';
 // tslint:disable-next-line:component-class-suffix
 export class EmployeeListComponent implements OnInit {
 
-  employees: [any];
+  employees: any;
 
   constructor( private employeeService: EmployeeServiceClient ) { }
 
   ngOnInit() {
     this.employeeService.findAllEmployees()
-      .subscribe({
-        next: (employees: [any]) => {
+      .subscribe(
+        (employees) => {
           this.employees = employees;
         }
-      });
+      );
 
   }
 
