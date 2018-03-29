@@ -257,7 +257,8 @@ createEmployee(dan)
 )
 
 // releate #2 利用`链式操作的思想去优雅的操作，promise 的嵌套逻辑`， promise代码优雅的两种方式： ==> 工厂函数与链式嵌套：
-// 链式嵌套的实质是，在一个promise中去返回另外一个promise;
+// 链式嵌套的实质是，在一个 promise 的回调函数中 去返回 另一个promise 的工厂函数； 如此返回的就是一个promise的实例； 注意其返回的是一个工厂函数；
+// 这是使用工厂函数最大的意义；
 
 createEmployee(dan)
   .then(
@@ -457,7 +458,10 @@ app.listen(3000);
 > 在实际的项目中 服务器 客户端  数据库都是运行在不同的沈北上面的；
 
 
-## join the angular to use our node service and mongodb database codes above
+## font-end code 前台的代码； 
+
+
+### join the angular to use our node service and mongodb database codes above
 
 > the app.js li litening for API employee, is our web service and is listening for get request; in the angular project we need to generate hte URL request to the API.  but programmatically we knoe how to do it manually that's easy. I jst typing the URL and I can do it manually, but we want to generate this URL dynamically  
 
@@ -526,8 +530,25 @@ export class EmployeeServiceClient {
 ```
 
 
-> 实际上一个项目有三个服务器 客户端 服务端 数据库， 有人后台的就是服务端与前台的交互，所以前端做的事情，其也会做一部分， 而有的后台做的是与数据库的交互，就是所谓的写接口了；
-> https://www.youtube.com/watch?v=MjFLBBwNULA&index=53&list=PL_GGiAMracOUd0dRb-yUXsZMWLgWNjxFh  进行不下去了，因为代码angular 5 关于hhtp这一块，改版了。
+### 比较 employee.model.server.js 与 employee.service.client.ts 这两个文件的异同；
+
+* employee.model.server.js 是node服务器用来和mongo服务器进行交互的文件， emplyee.service.client.ts文件是前台用来和node服务器进行交互的文件； 两个文件虽处于不同的系统，但做的事情，处的层级，与使用的方式 都是一摸一样的；
+
+* employee.model.server.js 文件内的方法，都返回一个promise的实例，即都是promise的工厂函数方法，并且所有的方法，都被挂在到了一个对象上面； 上层文件require employee.model.server.js 调用对象上面的方法，就会generate 一个promise的实例，然后我们就可以在这个实例上去注册一个handle方法；
+
+*  emplyee.service.client.ts 文件内的方法都是 Observable 类对象的工厂方法， 所有的方法 都挂在到 同一个类的对象方法上面， 该类被上层文件的类 注入之后，通过调用类实例对象的对象方法，就会 generate 一个Observable对象的实例， 在这个实例上我们可以去订阅 一系列的handle方法；
+
+* 由于两个文件的所有方法都是promise 或 observable 的工厂函数方法，所以方法与方法之间都是可以进行链式调用的， 因为链式调用的实质就是 在一个promise | observable 的handle 方法内， return 一个 promise | observable 的工程函数；
+
+*  两个文件都是模块，前者暴露一个对象，后者暴露一个类； 因为这两个文件，都不是入口文件；在js中除了入口js文件之外的其它任何文件都是模块，都是为了让入口文件 依赖而存在； 明白这个实质
+
+
+
+
+
+
+
+
 
 
 
