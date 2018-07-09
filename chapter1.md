@@ -11,7 +11,7 @@ show collections
 
 ## mongodb的安装
 
-> version 3.6.5 
+> version 3.6.5  https://docs.mongodb.com/v3.6/tutorial/install-mongodb-on-windows/
 
 1. 自定义的安装目录
 
