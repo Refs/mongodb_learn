@@ -39,7 +39,7 @@ Cmder.exe /REGISTER ALL
 
 > 注意一定要使用window 的命令行工具，且以管理员的方式去打开
 
-> 开启： net start MongoDB 关闭： net start MongoDB
+> 开启： net start MongoDB 关闭： net stop MongoDB
 
 Create a folder with the name config in your mongodb directory and a file with the name mongodb.conf in the newly created folder >> (so you should have this arrangement of path) >> C:\mongodb\config\mongodb.conf
 add this to the file mongodb.conf
