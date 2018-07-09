@@ -37,10 +37,6 @@ Cmder.exe /REGISTER ALL
 
 > https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/ 最终解决方案
 
-> 注意一定要使用window 的命令行工具，且以管理员的方式去打开
-
-> 开启： net start MongoDB 关闭： net stop MongoDB
-
 Create a folder with the name config in your mongodb directory and a file with the name mongodb.conf in the newly created folder >> (so you should have this arrangement of path) >> C:\mongodb\config\mongodb.conf
 add this to the file mongodb.conf
 
@@ -61,8 +57,10 @@ setParameter:
 
 run this line of code in CMD
 
+> 注意一定要使用window 的命令行工具，且以管理员的方式去打开
+
 ```bash
-mongod --config C:\mongodb\config\mongodb.conf --install
+sc.exe create MongoDB binPath= "\"C:\mongodb\bin\mongod.exe\" --service --config=\"C:\mongodb\config\mongodb.conf\"" DisplayName= "MongoDB" start= auto
 ```
 
 > error:  when starting mongod.exe, getting error of missing api-ms-win-crt-runtime-l1-1-0.dll
@@ -71,8 +69,10 @@ mongod --config C:\mongodb\config\mongodb.conf --install
 
 4. start the mongodb server
 
+> 注意一定要使用window 的命令行工具，且以管理员的方式去打开
+
 ```bash
-net start mongodb
+net start MongoDB
 
 ```
 
