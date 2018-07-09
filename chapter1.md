@@ -11,6 +11,8 @@ show collections
 
 ## mongodb的安装
 
+> version 3.6.5 
+
 1. 自定义的安装目录
 
 C:\mongodb
